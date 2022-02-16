@@ -27,6 +27,8 @@ def knn(target_variable,train,test,neighbors,p,weight):
                     l2.append(1/distance) ## formula for the distance depending on which type of distance
                 label.append(train.iloc[i]['class'])
         data = pd.DataFrame(list(zip(list_index , label , l2)), columns = {'index_key' , 'l2_distance' , 'label'})
+        
+        ## ^^ this chunk of code gives us the distance of ALL the points mapping from the test data to the train data with weights.
 
 
         list_index = []
@@ -48,6 +50,9 @@ def knn(target_variable,train,test,neighbors,p,weight):
         error_rate = data['predicted_label_error'].sum()/len(data)
 
         return data, error_rate
+    
+    ## ^^ this chunk of code gives us the final output of everything, it cleans up all the repeated data points and returns the minimum distance based on the neighbors with
+    ## weights.
 
     else:
         list_index = []
@@ -61,6 +66,8 @@ def knn(target_variable,train,test,neighbors,p,weight):
                 l2.append(distance)
                 label.append(train.iloc[i]['class'])
         data = pd.DataFrame(list(zip(list_index , label , l2)), columns = {'index_key' , 'l2_distance' , 'label'})
+        
+         ## ^^ this chunk of code gives us the distance of ALL the points mapping from the test data to the train data WITHOUT weights.
 
 
         list_index = []
@@ -84,4 +91,7 @@ def knn(target_variable,train,test,neighbors,p,weight):
 
 
         return data, error_rate
+    
+    ## ^^ this chunk of code gives us the final output of everything, it cleans up all the repeated data points and returns the minimum distance based on the neighbors without
+    ## weights.
 
